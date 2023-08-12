@@ -1,4 +1,4 @@
-import {IAvatar, IUser} from "../container/Projects/Projects";
+import {IAvatar} from "../container/Projects/Projects";
 
 export const mockProjects = [
     {
@@ -14,7 +14,8 @@ export const mockProjects = [
         }, {
             id: 3,
             name: 'Shayaan Sohail',
-        }, { id: 4,
+        }, {
+            id: 4,
             name: 'Ali Rashid',
         }, {
             id: 5,
@@ -34,12 +35,14 @@ export const mockProjects = [
         }, {
             id: 3,
             name: 'Shayaan Sohail',
-        }, { id: 4,
+        }, {
+            id: 4,
             name: 'Ali Rashid',
         }, {
             id: 5,
             name: 'Haisam Arshad'
-        }]    },
+        }]
+    },
     {
         id: 2,
         created_at: 'December 10, 2020',
@@ -53,12 +56,14 @@ export const mockProjects = [
         }, {
             id: 3,
             name: 'Shayaan Sohail',
-        }, { id: 4,
+        }, {
+            id: 4,
             name: 'Ali Rashid',
         }, {
             id: 5,
             name: 'Haisam Arshad'
-        }]    },
+        }]
+    },
     {
         id: 3,
         created_at: 'December 10, 2020',
@@ -72,44 +77,97 @@ export const mockProjects = [
         }, {
             id: 3,
             name: 'Shayaan Sohail',
-        }, { id: 4,
+        }, {
+            id: 4,
             name: 'Ali Rashid',
         }, {
             id: 5,
             name: 'Haisam Arshad'
-        }]    },
+        }]
+    },
 ]
 
 export const mockTasks = [
     {
+        id: 1,
         deadline: 'August 10, 2020',
         title: 'Design Landing Page',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad'],
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, {
+            id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }], status: 'IN_PROGRESS',
+        priority: 'HIGH'
+    },
+    {
+        id: 2,
+        deadline: 'August 10, 2020',
+        title: 'Design Landing Page',
+        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, {
+            id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }],
         status: 'IN_PROGRESS',
         priority: 'HIGH'
     },
     {
+        id: 3,
         deadline: 'August 10, 2020',
         title: 'Design Landing Page',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad'],
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, {
+            id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }],
         status: 'IN_PROGRESS',
         priority: 'HIGH'
     },
     {
+        id: 4,
         deadline: 'August 10, 2020',
         title: 'Design Landing Page',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad'],
-        status: 'IN_PROGRESS',
-        priority: 'HIGH'
-    },
-    {
-        deadline: 'August 10, 2020',
-        title: 'Design Landing Page',
-        description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries',
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad'],
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, {
+            id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }],
         status: 'IN_PROGRESS',
         priority: 'HIGH'
     },

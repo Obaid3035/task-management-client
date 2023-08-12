@@ -12,12 +12,15 @@ interface ICreateProject {
 }
 
 const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editData}) => {
-    const [formData, setFormData] = useState(
+    const initialValues = {
+        title: '',
+        deadline: ''
+    }
+    const [formData, setFormData] = useState<ProjectForm>(
         editData ? {
             title: editData.title,
-        } : {
-            title: '',
-        }
+            deadline: editData.deadline,
+        } : initialValues
     );
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +34,7 @@ const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editDa
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(formData);
-        setFormData({title: ''});
+        setFormData(initialValues);
         onCloseModal()
     };
 

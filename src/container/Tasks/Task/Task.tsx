@@ -5,6 +5,7 @@ import Avatar from "../../../component/Avatar/Avatar";
 import './Task.css';
 import {getColorForStatus, remainingUsers, truncateText} from "../../../utils/utils";
 import {IAvatar} from "../../Projects/Projects";
+import {TASK_PRIORITY, TASK_STATUS} from "../../../App";
 
 
 export interface ITask {

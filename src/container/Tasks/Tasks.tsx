@@ -15,6 +15,7 @@ const Tasks = () => {
                     mockTasks.map((task) => (
                         <Col md={3} className={'task mx-2 my-3'}>
                             <Task
+                                id={task.id}
                                 deadline={task.deadline}
                                 title={task.title}
                                 description={task.description}

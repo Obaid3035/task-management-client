@@ -9,6 +9,18 @@ export enum USER_ROLE {
   ADMIN = "admin"
 }
 
+export enum TASK_STATUS {
+    IN_PROGRESS = "In Progress",
+    COMPLETED = "completed",
+    CANCELLED = "cancelled"
+}
+
+export enum TASK_PRIORITY {
+    HIGH = "high",
+    MEDIUM = "medium",
+    LOW = "low"
+}
+
 function App() {
   return (
       <div className="App">
