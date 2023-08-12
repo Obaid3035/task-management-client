@@ -4,6 +4,7 @@ import Project from "./Project/Project";
 import CreateProject from "./CreateProject/CreateProject";
 import {mockProjects} from "../../utils/utils";
 import {useNavigate} from "react-router-dom";
+import CustomModal from "../../component/CustomModal/CustomModal";
 
 export interface IFormData {
     title: string
@@ -17,7 +18,6 @@ export interface ProjectData {
     completed_task: number,
     users: string[],
 }
-
 
 
 const Projects = () => {
@@ -60,19 +60,12 @@ const Projects = () => {
 
     return (
         <Container className={'mt-5 projects_container'}>
-            <Modal show={showModal}>
-                <Modal.Header>
-                    <Modal.Title>Create Project</Modal.Title>
-                    <Button className={'bg-black'} onClick={handleClose}>&times;</Button>
-
-                </Modal.Header>
-                <Modal.Body>
-                    <CreateProject
-                        editingData={editingData}
-                        onCloseModal={handleClose}
-                        onSubmit={onSubmitHandler}/>
-                </Modal.Body>
-            </Modal>
+            <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
+                <CreateProject
+                    editingData={editingData}
+                    onCloseModal={handleClose}
+                    onSubmit={onSubmitHandler}/>
+            </CustomModal>
             <div className={'d-flex align-items-center justify-content-between'}>
                 <h4 className={'fw-bold'}>My Projects</h4>
                 <Button className={'bg-black'} onClick={handleShow}>Create</Button>

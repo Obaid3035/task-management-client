@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Button, Form} from 'react-bootstrap';
 import './CreateProject.css';
 import {IFormData} from "../Projects";
-
 
 
 interface ICreateProject {
@@ -12,7 +11,7 @@ interface ICreateProject {
     editingData: IFormData | null;
 }
 
-const CreateProject: React.FC<ICreateProject> = ({ onSubmit, onCloseModal, editingData }) => {
+const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editingData}) => {
     const [formData, setFormData] = useState(
         editingData ? {
             title: editingData.title,
@@ -22,7 +21,7 @@ const CreateProject: React.FC<ICreateProject> = ({ onSubmit, onCloseModal, editi
     );
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value
@@ -32,7 +31,7 @@ const CreateProject: React.FC<ICreateProject> = ({ onSubmit, onCloseModal, editi
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(formData);
-        setFormData({ title: '' });
+        setFormData({title: ''});
         onCloseModal()
     };
 

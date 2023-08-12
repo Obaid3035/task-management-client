@@ -1,0 +1,19 @@
+.modal-content {
+    background-color: white;
+    color: black;
+}
+
+.modal-header {
+    background-color: black;
+    color: white;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    background-color: black;
+    color: white;
+    border-top: none;
+}
