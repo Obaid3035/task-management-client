@@ -2,7 +2,8 @@ import React from 'react';
 import './Project.css'
 import Avatar from "../../../component/Avatar/Avatar";
 
-interface IProject {
+export interface IProject {
+    id?: number
     created_at: string,
     title: string,
     total_task: number,
@@ -13,7 +14,9 @@ interface IProject {
 const Project: React.FC<IProject> = ({ created_at, completed_task, total_task, users, title}) => {
     let totalUsers = users.slice(0, 3);
     let remainingUsers = users.length - 3;
-    console.log(totalUsers, remainingUsers)
+
+
+
     return (
         <React.Fragment>
             <h4 className={'mb-0 text-start'}>{created_at}</h4>
