@@ -2,6 +2,8 @@ import React from 'react';
 import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 import Project from "./Project/Project";
 import CreateProject from "./CreateProject/CreateProject";
+import {mockProjects} from "../../utils/utils";
+import {useNavigate} from "react-router-dom";
 
 export interface IFormData {
     title: string
@@ -19,50 +21,11 @@ export interface ProjectData {
 
 
 const Projects = () => {
+    const navigation = useNavigate();
 
-
-
+    const [data, setData] = React.useState(mockProjects);
     const [showModal, setShowModal] = React.useState(false);
     const [editingData, setEditingData] = React.useState<ProjectData | null>(null);
-
-
-
-    const mockProjects = [
-        {
-            id: 0,
-            created_at: 'December 10, 2020',
-            title: 'Task Management System',
-            total_task: 10,
-            completed_task: 3,
-            users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-        },
-        {
-            id: 1,
-            created_at: 'December 10, 2020',
-            title: 'Task Management System',
-            total_task: 10,
-            completed_task: 3,
-            users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-        },
-        {
-            id: 2,
-            created_at: 'December 10, 2020',
-            title: 'Task Management System',
-            total_task: 10,
-            completed_task: 3,
-            users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-        },
-        {
-            id: 3,
-            created_at: 'December 10, 2020',
-            title: 'Task Management System',
-            total_task: 10,
-            completed_task: 3,
-            users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-        },
-    ]
-
-    const [data, setData] = React.useState(mockProjects)
 
     const handleShow = () => {
         setShowModal(true);
@@ -74,7 +37,6 @@ const Projects = () => {
 
 
     const onSubmitHandler = (formInput: IFormData) => {
-
         if (editingData) {
             const updatedData = data.map((item) => (item.id === editingData.id ? {
                 ...item,
@@ -120,7 +82,7 @@ const Projects = () => {
                 {
                     mockProjects.map((project) => {
                         return (
-                            <Col md={3} className={'project mx-2 my-3'}>
+                            <Col md={3} className={'project mx-2 my-3'} onClick={() => navigation('/tasks')}>
                                 <Project
                                     id={project.id}
                                     openEditModal={openEditModal}

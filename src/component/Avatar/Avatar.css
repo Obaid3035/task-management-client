@@ -1,12 +1,12 @@
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     margin: 0 5px;
     color: white;
