@@ -4,13 +4,15 @@ import { GiCancel } from 'react-icons/gi';
 import Avatar from "../../../component/Avatar/Avatar";
 import './Task.css';
 import {getColorForStatus, remainingUsers, truncateText} from "../../../utils/utils";
+import {IAvatar} from "../../Projects/Projects";
 
 
 export interface ITask {
+    id: number
     deadline: string,
     title: string,
     description: string,
-    users: string[],
+    users: IAvatar,
     status: string,
     priority: string
 }
@@ -26,7 +28,7 @@ const Task: React.FC<ITask> = ({ title, description, users, deadline, status, pr
                 {
                     total.length > 0 ? (
                         total.map((user) => (
-                            <Avatar name={user}/>
+                            <Avatar name={user.name}/>
                         ))
                     ) : 'No User'
                 }

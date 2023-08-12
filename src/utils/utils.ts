@@ -1,36 +1,83 @@
+import {IAvatar, IUser} from "../container/Projects/Projects";
+
 export const mockProjects = [
     {
         id: 0,
         created_at: 'December 10, 2020',
+        deadline: 'December 10, 2020',
         title: 'Task Management System',
         total_task: 10,
         completed_task: 3,
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, { id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }]
     },
     {
         id: 1,
         created_at: 'December 10, 2020',
+        deadline: 'December 10, 2020',
         title: 'Task Management System',
         total_task: 10,
         completed_task: 3,
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-    },
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, { id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }]    },
     {
         id: 2,
         created_at: 'December 10, 2020',
+        deadline: 'December 10, 2020',
         title: 'Task Management System',
         total_task: 10,
         completed_task: 3,
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-    },
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, { id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }]    },
     {
         id: 3,
         created_at: 'December 10, 2020',
+        deadline: 'December 10, 2020',
         title: 'Task Management System',
         total_task: 10,
         completed_task: 3,
-        users: ['Obaid Aqeel', 'Shayaan Sohail', 'Ali Rashid', 'Haisam Arshad']
-    },
+        users: [{
+            id: 1,
+            name: 'Obaid Aqeel',
+        }, {
+            id: 3,
+            name: 'Shayaan Sohail',
+        }, { id: 4,
+            name: 'Ali Rashid',
+        }, {
+            id: 5,
+            name: 'Haisam Arshad'
+        }]    },
 ]
 
 export const mockTasks = [
@@ -69,7 +116,7 @@ export const mockTasks = [
 ]
 
 
-export function remainingUsers(users: string[]): [string[], number] {
+export function remainingUsers(users: IAvatar): [IAvatar, number] {
     return [users.slice(0, 3), users.length - 3]
 }
 
@@ -84,7 +131,7 @@ export function truncateText(text: string, maxLength: number) {
 export function getColorForStatus(status: string) {
     let colorObj = {
         background: '#000000',
-        color: '#000000'
+        color: '#FFFFFF'
     }
 
     switch (status) {

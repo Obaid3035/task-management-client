@@ -6,17 +6,27 @@ import {mockProjects} from "../../utils/utils";
 import {useNavigate} from "react-router-dom";
 import CustomModal from "../../component/CustomModal/CustomModal";
 
+export interface IUser {
+    id: number,
+    name: string,
+    email: string
+}
+
+export type IAvatar = Omit<IUser, 'email'>[]
+
 export interface ProjectForm {
-    title: string
+    title: string,
+    deadline: string
 }
 
 export interface ProjectData {
     id: number
     created_at: string,
+    deadline: string,
     title: string,
     total_task: number,
     completed_task: number,
-    users: string[],
+    users: IAvatar
 }
 
 
@@ -72,6 +82,7 @@ const Projects = () => {
                                 <Col key={project.id} md={3} className={'project mx-2 my-3'} onClick={() => navigation('/tasks')}>
                                     <Project
                                         id={project.id}
+                                        deadline={project.deadline}
                                         openEditModal={openEditModal}
                                         completed_task={project.completed_task}
                                         created_at={project.created_at}
