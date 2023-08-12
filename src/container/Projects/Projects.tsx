@@ -1,11 +1,21 @@
 import React from 'react';
 import {Button, Col, Container, Modal, Row} from "react-bootstrap";
-import Project, {IProject} from "./Project/Project";
+import Project from "./Project/Project";
 import CreateProject from "./CreateProject/CreateProject";
 
 export interface IFormData {
     title: string
 }
+
+export interface ProjectData {
+    id: number
+    created_at: string,
+    title: string,
+    total_task: number,
+    completed_task: number,
+    users: string[],
+}
+
 
 
 const Projects = () => {
@@ -13,7 +23,7 @@ const Projects = () => {
 
 
     const [showModal, setShowModal] = React.useState(false);
-    const [editingData, setEditingData] = React.useState<IProject | null>(null);
+    const [editingData, setEditingData] = React.useState<ProjectData | null>(null);
 
 
 
@@ -54,8 +64,13 @@ const Projects = () => {
 
     const [data, setData] = React.useState(mockProjects)
 
-    const handleShow = () => setShowModal(true);
-    const handleClose = () => setShowModal(false);
+    const handleShow = () => {
+        setShowModal(true);
+    }
+    const handleClose = () => {
+        setShowModal(false);
+        setEditingData(null);
+    }
 
 
     const onSubmitHandler = (formInput: IFormData) => {
@@ -73,19 +88,13 @@ const Projects = () => {
     }
 
 
-    const openModal = () => setShowModal(true);
-
     const openEditModal = (id: number) => {
         setShowModal(true);
-        const foundItem: IProject | undefined = data.find(item => item.id === id);
-        const found: IProject | null = foundItem ? foundItem : null;
+        const foundItem: ProjectData | undefined = data.find(item => item.id === id);
+        const found: ProjectData | null = foundItem ? foundItem : null;
         setEditingData(found);
     }
 
-    const closeModal = () => {
-        setShowModal(false);
-        setEditingData(null);
-    }
 
     return (
         <Container className={'mt-5 projects_container'}>
@@ -113,6 +122,8 @@ const Projects = () => {
                         return (
                             <Col md={3} className={'project mx-2 my-3'}>
                                 <Project
+                                    id={project.id}
+                                    openEditModal={openEditModal}
                                     completed_task={project.completed_task}
                                     created_at={project.created_at}
                                     title={project.title}

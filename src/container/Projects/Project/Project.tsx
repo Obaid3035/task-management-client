@@ -1,17 +1,15 @@
 import React from 'react';
-import './Project.css'
 import Avatar from "../../../component/Avatar/Avatar";
+import { FiEdit2 } from 'react-icons/fi'
+import './Project.css'
+import { ProjectData} from "../Projects";
 
-export interface IProject {
-    id?: number
-    created_at: string,
-    title: string,
-    total_task: number,
-    completed_task: number,
-    users: string[]
+export interface IProject extends ProjectData{
+    openEditModal: (id: number) => void
 }
 
-const Project: React.FC<IProject> = ({ created_at, completed_task, total_task, users, title}) => {
+
+const Project: React.FC<IProject> = ({ id, created_at, completed_task, total_task, users, title, openEditModal}) => {
     let totalUsers = users.slice(0, 3);
     let remainingUsers = users.length - 3;
 
@@ -19,7 +17,10 @@ const Project: React.FC<IProject> = ({ created_at, completed_task, total_task, u
 
     return (
         <React.Fragment>
-            <h4 className={'mb-0 text-start'}>{created_at}</h4>
+            <div className="d-flex align-items-center justify-content-between">
+                <h4 className={'mb-0 text-start'}>{created_at}</h4>
+                <FiEdit2 onClick={() => openEditModal(id)}/>
+            </div>
             <p className={'mt-3'}>{title}</p>
             <p className={'text-start my-3'}>Progress</p>
             <div className="progress_bar">

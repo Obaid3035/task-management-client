@@ -13,9 +13,13 @@ interface ICreateProject {
 }
 
 const CreateProject: React.FC<ICreateProject> = ({ onSubmit, onCloseModal, editingData }) => {
-    const [formData, setFormData] = useState({
-        title: '',
-    });
+    const [formData, setFormData] = useState(
+        editingData ? {
+            title: editingData.title,
+        } : {
+            title: '',
+        }
+    );
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
