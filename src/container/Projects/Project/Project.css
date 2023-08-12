@@ -4,20 +4,28 @@
     border-radius: 20px;
     padding: 19px 20px;
     max-width: 300px;
-    cursor: pointer;
 }
 
-.project p {
+.project h2 {
+    cursor: pointer;
+    color: #F8B716;
     margin: 0;
     font-size: 17px;
     font-weight: 600;
 }
 
+.project p {
+    margin: 0;
+}
 .project_header p {
     font-size: 13px;
     color: #7F7870;
     margin: 0;
     text-align: left;
+}
+
+.project_header svg {
+    cursor: pointer;
 }
 
 .progress_bar {
@@ -30,7 +38,7 @@
 
 .filler {
     height: 100%;
-    background-color: black;
+    background-color: #F8B716;
     transition: width 0.3s ease-in;
 }
 

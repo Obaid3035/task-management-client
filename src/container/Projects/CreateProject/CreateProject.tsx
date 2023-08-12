@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 import './CreateProject.css';
 import {ProjectForm} from "../Projects";
+import CustomButton from "../../../component/Button/Button";
 
 
 interface ICreateProject {
@@ -49,7 +50,7 @@ const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editDa
                     onChange={handleChange}
                 />
             </Form.Group>
-            <Button className={'mt-4'} type="submit">Submit</Button>
+            <CustomButton className={'mt-4'} >Submit</CustomButton>
         </Form>
 
     );

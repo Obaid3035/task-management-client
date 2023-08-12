@@ -8,6 +8,10 @@
     color: white;
 }
 
+.modal-header .btn-primary {
+    font-size: 23px;
+}
+
 .modal-body {
     padding: 20px;
 }

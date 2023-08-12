@@ -1,0 +1,7 @@
+.custom_btn {
+    background-color: #F8B716;
+}
+
+.custom_btn:hover {
+    background-color: black;
+}

@@ -4,7 +4,6 @@
     border-radius: 20px;
     padding: 19px 20px;
     max-width: 300px;
-    cursor: pointer;
     text-align: left;
 }
 .task p {
@@ -12,7 +11,9 @@
 }
 
 .task h4 {
+    color: #F8B716;
     font-size: 18px;
+    cursor: pointer;
 }
 .task_deadline {
     font-size: 14px;

@@ -1,4 +1,5 @@
 import {IAvatar} from "../container/Projects/Projects";
+import {TASK_PRIORITY, TASK_STATUS} from "../App";
 
 export const mockProjects = [
     {
@@ -105,8 +106,8 @@ export const mockTasks = [
         }, {
             id: 5,
             name: 'Haisam Arshad'
-        }], status: 'IN_PROGRESS',
-        priority: 'HIGH'
+        }], status: TASK_STATUS.IN_PROGRESS,
+        priority: TASK_PRIORITY.HIGH
     },
     {
         id: 2,
@@ -126,8 +127,8 @@ export const mockTasks = [
             id: 5,
             name: 'Haisam Arshad'
         }],
-        status: 'IN_PROGRESS',
-        priority: 'HIGH'
+        status: TASK_STATUS.COMPLETED,
+        priority: TASK_PRIORITY.LOW
     },
     {
         id: 3,
@@ -147,8 +148,8 @@ export const mockTasks = [
             id: 5,
             name: 'Haisam Arshad'
         }],
-        status: 'IN_PROGRESS',
-        priority: 'HIGH'
+        status: TASK_STATUS.CANCELLED,
+        priority: TASK_PRIORITY.MEDIUM
     },
     {
         id: 4,
@@ -168,8 +169,8 @@ export const mockTasks = [
             id: 5,
             name: 'Haisam Arshad'
         }],
-        status: 'IN_PROGRESS',
-        priority: 'HIGH'
+        status: TASK_STATUS.COMPLETED,
+        priority: TASK_PRIORITY.LOW
     },
 ]
 
@@ -193,22 +194,22 @@ export function getColorForStatus(status: string) {
     }
 
     switch (status) {
-        case 'IN_PROGRESS':
-        case 'MEDIUM':
+        case TASK_STATUS.CANCELLED:
+        case TASK_PRIORITY.MEDIUM:
             colorObj = {
                 background: '#FEF2E7',
                 color: '#F3AE5F'
             }
             break;
-        case 'COMPLETED':
-        case 'LOW':
+        case TASK_STATUS.IN_PROGRESS:
+        case TASK_PRIORITY.HIGH:
             colorObj = {
                 background: '#E6F9F6',
                 color: '#3DBBA0'
             }
             break;
-        case 'CANCELLED':
-        case 'HIGH':
+        case TASK_STATUS.COMPLETED:
+        case TASK_PRIORITY.LOW:
             colorObj = {
                 background: '#FCE7EA',
                 color: '#E7828C'

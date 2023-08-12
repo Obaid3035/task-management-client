@@ -1,10 +1,10 @@
 import React from 'react';
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import Project from "./Project/Project";
 import CreateProject from "./CreateProject/CreateProject";
 import {mockProjects} from "../../utils/utils";
-import {useNavigate} from "react-router-dom";
 import CustomModal from "../../component/CustomModal/CustomModal";
+import CustomButton from "../../component/Button/Button";
 
 export interface IUser {
     id: number,
@@ -32,7 +32,6 @@ export interface ProjectData {
 
 const Projects = () => {
 
-    const navigation = useNavigate();
 
     const [data, setData] = React.useState<ProjectData[]>(mockProjects);
     const [showModal, setShowModal] = React.useState<boolean>(false);
@@ -72,14 +71,14 @@ const Projects = () => {
             </CustomModal>
             <div className={'d-flex align-items-center justify-content-between'}>
                 <h4 className={'fw-bold'}>My Projects</h4>
-                <Button className={'bg-black'} onClick={handleShow}>Create</Button>
+                <CustomButton handleShow={handleShow}>Create</CustomButton>
             </div>
             <Row className={'justify-content-center align-items-center'}>
                 {
                     mockProjects && mockProjects.length > 0 ? (
                         mockProjects.map((project) => {
                             return (
-                                <Col key={project.id} md={3} className={'project mx-2 my-3'} onClick={() => navigation('/tasks')}>
+                                <Col key={project.id} md={3} className={'project mx-2 my-3'}>
                                     <Project
                                         id={project.id}
                                         deadline={project.deadline}

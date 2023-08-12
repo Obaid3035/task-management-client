@@ -2,13 +2,14 @@ import React from 'react';
 import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 import Task from "./Task/Task";
 import {mockTasks} from "../../utils/utils";
+import CustomButton from "../../component/Button/Button";
 
 const Tasks = () => {
     return (
         <Container className={'mt-5 projects_container'}>
             <div className={'d-flex align-items-center justify-content-between'}>
                 <h4 className={'fw-bold'}>My Tasks</h4>
-                <Button className={'bg-black'}>Create</Button>
+                <CustomButton>Create</CustomButton>
             </div>
             <Row className={'justify-content-center '}>
                 {
