@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 import './CreateProject.css';
-import {IFormData} from "../Projects";
+import {ProjectForm} from "../Projects";
 
 
 interface ICreateProject {
-    onSubmit: (formData: IFormData) => void;
+    onSubmit: (formData: ProjectForm) => void;
     onCloseModal: () => void;
-    initialValues?: IFormData;
-    editingData: IFormData | null;
+    initialValues?: ProjectForm;
+    editData: ProjectForm | null;
 }
 
-const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editingData}) => {
+const CreateProject: React.FC<ICreateProject> = ({onSubmit, onCloseModal, editData}) => {
     const [formData, setFormData] = useState(
-        editingData ? {
-            title: editingData.title,
+        editData ? {
+            title: editData.title,
         } : {
             title: '',
         }

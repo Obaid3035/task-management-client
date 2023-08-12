@@ -1,12 +1,12 @@
 import React from 'react';
-import {Button, Col, Container, Modal, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import Project from "./Project/Project";
 import CreateProject from "./CreateProject/CreateProject";
 import {mockProjects} from "../../utils/utils";
 import {useNavigate} from "react-router-dom";
 import CustomModal from "../../component/CustomModal/CustomModal";
 
-export interface IFormData {
+export interface ProjectForm {
     title: string
 }
 
@@ -21,48 +21,42 @@ export interface ProjectData {
 
 
 const Projects = () => {
+
     const navigation = useNavigate();
 
-    const [data, setData] = React.useState(mockProjects);
-    const [showModal, setShowModal] = React.useState(false);
-    const [editingData, setEditingData] = React.useState<ProjectData | null>(null);
+    const [data, setData] = React.useState<ProjectData[]>(mockProjects);
+    const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [editData, setEditData] = React.useState<ProjectData | null>(null);
 
-    const handleShow = () => {
-        setShowModal(true);
-    }
+    const handleShow = () => setShowModal(true);
+
     const handleClose = () => {
         setShowModal(false);
-        setEditingData(null);
+        setEditData(null);
     }
 
-
-    const onSubmitHandler = (formInput: IFormData) => {
-        if (editingData) {
-            const updatedData = data.map((item) => (item.id === editingData.id ? {
-                ...item,
-                title: formInput.title
-            } : item));
-            setData(updatedData);
-            setEditingData(null);
+    const onSubmitHandler = (formInput: ProjectForm) => {
+        if (editData) {
+            // Edit
+            setEditData(null);
         } else {
             // Create
         }
     }
 
-
     const openEditModal = (id: number) => {
         setShowModal(true);
         const foundItem: ProjectData | undefined = data.find(item => item.id === id);
         const found: ProjectData | null = foundItem ? foundItem : null;
-        setEditingData(found);
+        setEditData(found);
     }
 
 
     return (
-        <Container className={'mt-5 projects_container'}>
+        <Container className={'mt-5'}>
             <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
                 <CreateProject
-                    editingData={editingData}
+                    editData={editData}
                     onCloseModal={handleClose}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>
@@ -70,23 +64,28 @@ const Projects = () => {
                 <h4 className={'fw-bold'}>My Projects</h4>
                 <Button className={'bg-black'} onClick={handleShow}>Create</Button>
             </div>
-            <Row className={'justify-content-center'}>
-
+            <Row className={'justify-content-center align-items-center'}>
                 {
-                    mockProjects.map((project) => {
-                        return (
-                            <Col md={3} className={'project mx-2 my-3'} onClick={() => navigation('/tasks')}>
-                                <Project
-                                    id={project.id}
-                                    openEditModal={openEditModal}
-                                    completed_task={project.completed_task}
-                                    created_at={project.created_at}
-                                    title={project.title}
-                                    total_task={project.total_task}
-                                    users={project.users}/>
-                            </Col>
-                        )
-                    })
+                    mockProjects && mockProjects.length > 0 ? (
+                        mockProjects.map((project) => {
+                            return (
+                                <Col key={project.id} md={3} className={'project mx-2 my-3'} onClick={() => navigation('/tasks')}>
+                                    <Project
+                                        id={project.id}
+                                        openEditModal={openEditModal}
+                                        completed_task={project.completed_task}
+                                        created_at={project.created_at}
+                                        title={project.title}
+                                        total_task={project.total_task}
+                                        users={project.users}/>
+                                </Col>
+                            )
+                        })
+                    ) : (
+                        <div>
+                            No Projects Found
+                        </div>
+                    )
                 }
 
             </Row>

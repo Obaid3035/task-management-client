@@ -9,6 +9,7 @@ const Avatar: React.FC<{ name: string }>  = ({name}) => {
         .join('')
         .toUpperCase();
 
+
     return (
         <div className="avatar">
             <span>{initials}</span>

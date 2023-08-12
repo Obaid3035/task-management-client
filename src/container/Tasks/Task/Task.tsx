@@ -3,6 +3,7 @@ import { AiFillCheckCircle, AiFillPlusCircle } from 'react-icons/ai';
 import { GiCancel } from 'react-icons/gi';
 import Avatar from "../../../component/Avatar/Avatar";
 import './Task.css';
+import {getColorForStatus, remainingUsers, truncateText} from "../../../utils/utils";
 
 
 export interface ITask {
@@ -15,35 +16,46 @@ export interface ITask {
 }
 
 const Task: React.FC<ITask> = ({ title, description, users, deadline, status, priority}) => {
-    let totalUsers = users.slice(0, 3);
-    let remainingUsers = users.length - 3;
+    const [total, remaining] = remainingUsers(users);
     return (
         <React.Fragment>
-            <div>
-                <p>{ deadline }</p>
-                <h4>{ title }</h4>
-                <p className={'text-muted'}>{ description }</p>
-                <div className="d-flex mt-3 align-items-center">
-                    {
-                        totalUsers.map((user) => (
+            <p className={'task_deadline'}>{ deadline }</p>
+            <h4 className={'my-3'}>{ title }</h4>
+            <p className={'text-muted task_description'}>{ truncateText(description, 100) }</p>
+            <div className="d-flex mt-3 align-items-center">
+                {
+                    total.length > 0 ? (
+                        total.map((user) => (
                             <Avatar name={user}/>
                         ))
-                    }
-                    {
-                        remainingUsers > 0 ? (
-                            <Avatar name={`+ ${remainingUsers}`}/>
-                        ) : null
-                    }
-                    <AiFillPlusCircle/>
-                </div>
-                <hr/>
-                <div className={'d-flex justify-content-between align-items-center'}>
-                    <p className={'task_status'}>{ status }</p>
-                    <p className={'task_priority'}>{ priority }</p>
-                    <div>
-                        <AiFillCheckCircle/>
-                        <GiCancel/>
-                    </div>
+                    ) : 'No User'
+                }
+                {
+                    remaining > 0 && (
+                        <Avatar name={`+ ${remaining}`}/>
+                    )
+                }
+                <AiFillPlusCircle className={'add_users'}/>
+            </div>
+            <hr/>
+            <div className={'d-flex justify-content-between align-items-center'}>
+                <p
+                    className={'task_status'}
+                    style={{
+                        backgroundColor: getColorForStatus(status).background,
+                        color: getColorForStatus(status).color
+                    }}
+                >{ status }</p>
+                <p
+                    className={'task_priority'}
+                    style={{
+                        backgroundColor: getColorForStatus(priority).background,
+                        color: getColorForStatus(priority).color
+                    }}
+                >{ priority }</p>
+                <div>
+                    <AiFillCheckCircle className={'toComplete'}/>
+                    <GiCancel className={'toCancel'}/>
                 </div>
             </div>
         </React.Fragment>
