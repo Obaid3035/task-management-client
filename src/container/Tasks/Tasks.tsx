@@ -1,10 +1,51 @@
 import React from 'react';
-import {Button, Col, Container, Modal, Row} from "react-bootstrap";
-import Task from "./Task/Task";
+import {Col, Container, Row} from "react-bootstrap";
+import Task, {ITask, ITaskForm} from "./Task/Task";
 import {mockTasks} from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
 
+
 const Tasks = () => {
+
+    const [tasks, setTasks] = React.useState<ITask[]>(mockTasks);
+    const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [editTask, setEditTask] = React.useState<ITaskForm | null>(null);
+
+    const handleShow = () => setShowModal(true);
+
+    const handleClose = () => {
+        setShowModal(false);
+        setEditTask(null);
+    }
+
+    const onSubmitHandler = (formInput: ITask) => {
+        if (editTask) {
+            // Edit
+            setEditTask(null);
+        } else {
+            // Create
+        }
+    }
+
+    const openEditModal = (id: number) => {
+        setShowModal(true);
+        const found: ITask = tasks.find(item => item.id === id)!
+        setEditTask({
+            title: found.title,
+            description: found.description,
+            status: found.status,
+            priority: found.priority,
+            users: found.users.map((user) => {
+                return {
+                    value: user.id,
+                    label: user.name
+                }
+            }),
+            deadline: found.deadline
+        });
+    }
+
+
     return (
         <Container className={'mt-5 projects_container'}>
             <div className={'d-flex align-items-center justify-content-between'}>

@@ -4,11 +4,11 @@ import { GiCancel } from 'react-icons/gi';
 import Avatar from "../../../component/Avatar/Avatar";
 import './Task.css';
 import {getColorForStatus, remainingUsers, truncateText} from "../../../utils/utils";
-import {IAvatar} from "../../Projects/Projects";
+import {IAvatar, ISelect} from "../../Projects/Projects";
 
 
 export interface ITask {
-    id: number
+    id?: number
     deadline: string,
     title: string,
     description: string,
@@ -16,6 +16,11 @@ export interface ITask {
     status: string,
     priority: string
 }
+
+export interface ITaskForm extends Omit<ITask, 'users'> {
+    users?: ISelect[]
+}
+
 
 const Task: React.FC<ITask> = ({ title, description, users, deadline, status, priority}) => {
     const [total, remaining] = remainingUsers(users);
