@@ -36,7 +36,7 @@ const Project: React.FC<IProject> = ({id, created_at, completed_task, total_task
                     {
                         total.length > 0 ? (
                             total.map((user) => (
-                                <Avatar name={user.name}/>
+                                <Avatar key={user.id} name={user.name}/>
                             ))
                         ) : 'No User'
                     }

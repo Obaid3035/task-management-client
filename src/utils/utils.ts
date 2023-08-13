@@ -1,5 +1,6 @@
 import {IAvatar} from "../container/Projects/Projects";
-import {TASK_PRIORITY, TASK_STATUS} from "../App";
+import {TASK_PRIORITY, TASK_STATUS} from "./enum";
+
 
 export const mockProjects = [
     {

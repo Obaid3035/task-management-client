@@ -14,9 +14,15 @@ export interface IUser {
 
 export type IAvatar = Omit<IUser, 'email'>[]
 
+export interface ISelect {
+    value: number,
+    label: string
+}
+
 export interface ProjectForm {
     title: string,
-    deadline: string
+    deadline: string,
+    users: ISelect[]
 }
 
 export interface ProjectData {
@@ -35,7 +41,7 @@ const Projects = () => {
 
     const [data, setData] = React.useState<ProjectData[]>(mockProjects);
     const [showModal, setShowModal] = React.useState<boolean>(false);
-    const [editData, setEditData] = React.useState<ProjectData | null>(null);
+    const [editData, setEditData] = React.useState<ProjectForm | null>(null);
 
     const handleShow = () => setShowModal(true);
 
@@ -55,9 +61,17 @@ const Projects = () => {
 
     const openEditModal = (id: number) => {
         setShowModal(true);
-        const foundItem: ProjectData | undefined = data.find(item => item.id === id);
-        const found: ProjectData | null = foundItem ? foundItem : null;
-        setEditData(found);
+        const found: ProjectData = data.find(item => item.id === id)!
+        setEditData({
+            title: found.title,
+            users: found.users.map((user) => {
+                return {
+                    value: user.id,
+                    label: user.name
+                }
+            }),
+            deadline: found.deadline
+        });
     }
 
 

@@ -14,7 +14,7 @@ const Tasks = () => {
             <Row className={'justify-content-center '}>
                 {
                     mockTasks.map((task) => (
-                        <Col md={3} className={'task mx-2 my-3'}>
+                        <Col key={task.id} md={3} className={'task mx-2 my-3'}>
                             <Task
                                 id={task.id}
                                 deadline={task.deadline}
