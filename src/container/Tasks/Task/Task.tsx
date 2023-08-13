@@ -1,10 +1,10 @@
 import React from 'react';
-import { AiFillCheckCircle, AiFillPlusCircle } from 'react-icons/ai';
-import { GiCancel } from 'react-icons/gi';
+import {AiFillCheckCircle, AiFillPlusCircle} from 'react-icons/ai';
+import {GiCancel} from 'react-icons/gi';
 import Avatar from "../../../component/Avatar/Avatar";
 import './Task.css';
 import {getColorForStatus, remainingUsers, truncateText} from "../../../utils/utils";
-import {IAvatar, ISelect} from "../../Projects/Projects";
+import {IUser} from "../../../interface";
 
 
 export interface ITask {
@@ -12,23 +12,19 @@ export interface ITask {
     deadline: string,
     title: string,
     description: string,
-    users: IAvatar,
+    users: IUser[],
     status: string,
     priority: string
 }
 
-export interface ITaskForm extends Omit<ITask, 'users'> {
-    users?: ISelect[]
-}
 
-
-const Task: React.FC<ITask> = ({ title, description, users, deadline, status, priority}) => {
+const Task: React.FC<ITask> = ({title, description, users, deadline, status, priority}) => {
     const [total, remaining] = remainingUsers(users);
     return (
         <React.Fragment>
-            <p className={'task_deadline'}>{ deadline }</p>
-            <h4 className={'my-3'}>{ title }</h4>
-            <p className={'text-muted task_description'}>{ truncateText(description, 100) }</p>
+            <p className={'task_deadline'}>{deadline}</p>
+            <h4 className={'my-3'}>{title}</h4>
+            <p className={'text-muted task_description'}>{truncateText(description, 100)}</p>
             <div className="d-flex mt-3 align-items-center">
                 {
                     total.length > 0 ? (
@@ -52,14 +48,14 @@ const Task: React.FC<ITask> = ({ title, description, users, deadline, status, pr
                         backgroundColor: getColorForStatus(status).background,
                         color: getColorForStatus(status).color
                     }}
-                >{ status }</p>
+                >{status}</p>
                 <p
                     className={'task_priority'}
                     style={{
                         backgroundColor: getColorForStatus(priority).background,
                         color: getColorForStatus(priority).color
                     }}
-                >{ priority }</p>
+                >{priority}</p>
                 <div>
                     <AiFillCheckCircle className={'toComplete'}/>
                     <GiCancel className={'toCancel'}/>

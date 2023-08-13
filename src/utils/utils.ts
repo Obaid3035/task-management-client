@@ -1,5 +1,5 @@
-import {IAvatar} from "../container/Projects/Projects";
 import {TASK_PRIORITY, TASK_STATUS} from "./enum";
+import {IUser} from "../interface";
 
 
 export const mockProjects = [
@@ -176,7 +176,7 @@ export const mockTasks = [
 ]
 
 
-export function remainingUsers(users: IAvatar): [IAvatar, number] {
+export function remainingUsers(users: IUser[]): [IUser[], number] {
     return [users.slice(0, 3), users.length - 3]
 }
 

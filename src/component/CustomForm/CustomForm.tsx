@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form} from 'react-bootstrap';
 import Select from 'react-select';
-import {ISelect} from "../../container/Projects/Projects";
+import {ISelect} from "../../interface";
 
 interface ICustomForm {
     formData: any;
@@ -41,6 +41,17 @@ const CustomForm: React.FC<ICustomForm> = (
                     onChange={handleChange}
                 />
             </Form.Group>
+            {fields.description && (
+                <Form.Group className={'mt-3'}>
+                    <Form.Label>{fields.description}</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+            )}
             <Form.Group className={'mt-3'}>
                 <Form.Label>{fields.deadline}</Form.Label>
                 <Form.Control
@@ -51,6 +62,7 @@ const CustomForm: React.FC<ICustomForm> = (
                     placeholder="Select a date"
                 />
             </Form.Group>
+
             <Form.Group className={'mt-3'}>
                 <Form.Label>Assign Users</Form.Label>
                 <Select
@@ -68,22 +80,10 @@ const CustomForm: React.FC<ICustomForm> = (
                     classNamePrefix="select"
                 />
             </Form.Group>
-            {fields.description && (
-                <Form.Group className={'mt-3'}>
-                    <Form.Label>{fields.description}</Form.Label>
-                    <Form.Control
-                        type="text"
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                    />
-                </Form.Group>
-            )}
             {fields.status && (
                 <Form.Group className={'mt-3'}>
                     <Form.Label>{fields.status }</Form.Label>
                     <Select
-                        isMulti
                         name="colors"
                         options={status}
                         onChange={(option: any) => {
@@ -102,7 +102,6 @@ const CustomForm: React.FC<ICustomForm> = (
                 <Form.Group className={'mt-3'}>
                     <Form.Label>{fields.priority}</Form.Label>
                     <Select
-                        isMulti
                         name="colors"
                         options={priority}
                         onChange={(option) => {

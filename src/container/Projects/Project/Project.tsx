@@ -2,11 +2,11 @@ import React from 'react';
 import Avatar from "../../../component/Avatar/Avatar";
 import {FiEdit2} from 'react-icons/fi'
 import './Project.css'
-import {ProjectData} from "../Projects";
 import {remainingUsers} from "../../../utils/utils";
 import {useNavigate} from "react-router-dom";
+import {IProjectData, IUser} from "../../../interface";
 
-export interface IProject extends ProjectData {
+export interface IProject extends IProjectData {
     openEditModal: (id: number) => void
 }
 
@@ -35,7 +35,7 @@ const Project: React.FC<IProject> = ({id, created_at, completed_task, total_task
                 <div className={'d-flex align-item-center '}>
                     {
                         total.length > 0 ? (
-                            total.map((user) => (
+                            total.map((user: IUser) => (
                                 <Avatar key={user.id} name={user.name}/>
                             ))
                         ) : 'No User'

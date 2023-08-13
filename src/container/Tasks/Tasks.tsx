@@ -1,10 +1,12 @@
 import React from 'react';
-import {Col, Container, Row} from "react-bootstrap";
-import Task, {ITask, ITaskForm} from "./Task/Task";
+import {Container, Row} from "react-bootstrap";
+import {ITask} from "./Task/Task";
 import {mockTasks} from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
 import CustomModal from "../../component/CustomModal/CustomModal";
 import CreateTask from "./CreateTask/CreateTask";
+import {ITaskForm} from "../../interface";
+import TaskList from "./TaskList";
 
 
 const Tasks = () => {
@@ -50,7 +52,7 @@ const Tasks = () => {
 
     return (
         <Container className={'mt-5 projects_container'}>
-            <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
+            <CustomModal showModal={showModal} title={'Create Task'} handleClose={handleClose}>
                 <CreateTask
                     editData={editTask}
                     onCloseModal={handleClose}
@@ -60,22 +62,12 @@ const Tasks = () => {
                 <h4 className={'fw-bold'}>My Tasks</h4>
                 <CustomButton handleShow={handleShow}>Create</CustomButton>
             </div>
-            <Row className={'justify-content-center '}>
-                {
-                    mockTasks.map((task) => (
-                        <Col key={task.id} md={3} className={'task mx-2 my-3'}>
-                            <Task
-                                id={task.id}
-                                deadline={task.deadline}
-                                title={task.title}
-                                description={task.description}
-                                users={task.users}
-                                status={task.status}
-                                priority={task.priority}
-                            />
-                        </Col>
-                    ))
-                }
+            <Row className={'justify-content-center'}>
+                {mockTasks.length > 0 ? (
+                    <TaskList tasks={mockTasks}/>
+                ) : (
+                    <div>No Tasks Found</div>
+                )}
             </Row>
         </Container>
     );

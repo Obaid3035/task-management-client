@@ -3,8 +3,8 @@ import {Form} from 'react-bootstrap';
 import CustomForm from "../../../component/CustomForm/CustomForm";
 import CustomButton from '../../../component/Button/Button';
 import {useFormSubmission} from '../../../hooks/useFormSubmission';
-import {ProjectForm} from "../Projects";
 import {users} from "../../../utils/utils";
+import {IProjectForm} from "../../../interface";
 
 export interface ICreate<T> {
     onSubmit: (formData: T) => void;
@@ -12,8 +12,8 @@ export interface ICreate<T> {
     editData: T | null;
 }
 
-const CreateProject: React.FC<ICreate<ProjectForm>> = ({onSubmit, onCloseModal, editData}) => {
-    const projectInitialValues: ProjectForm = {
+const CreateProject: React.FC<ICreate<IProjectForm>> = ({onSubmit, onCloseModal, editData}) => {
+    const projectInitialValues: IProjectForm = {
         title: '',
         deadline: '',
         users: [],
@@ -24,7 +24,7 @@ const CreateProject: React.FC<ICreate<ProjectForm>> = ({onSubmit, onCloseModal, 
         deadline: 'Deadline',
     };
 
-    const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<ProjectForm>(
+    const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<IProjectForm>(
         editData || projectInitialValues,
         onSubmit,
         onCloseModal
