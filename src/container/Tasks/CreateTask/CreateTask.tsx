@@ -3,18 +3,18 @@ import {Form} from 'react-bootstrap';
 import CustomForm from "../../../component/CustomForm/CustomForm";
 import CustomButton from '../../../component/Button/Button';
 import {useFormSubmission} from '../../../hooks/useFormSubmission';
-import {ProjectForm} from "../Projects";
 import {users} from "../../../utils/utils";
+import {ICreate} from "../../Projects/CreateProject/CreateProject";
+import {ITaskForm} from "../Task/Task"; // Import the custom hook
 
-export interface ICreate<T> {
-    onSubmit: (formData: T) => void;
-    onCloseModal: () => void;
-    editData: T | null;
-}
 
-const CreateProject: React.FC<ICreate<ProjectForm>> = ({onSubmit, onCloseModal, editData}) => {
-    const projectInitialValues: ProjectForm = {
+
+const CreateTask: React.FC<ICreate<ITaskForm>> = ({onSubmit, onCloseModal, editData}) => {
+    const taskInitialValues: ITaskForm = {
         title: '',
+        description: '',
+        status: '',
+        priority: '',
         deadline: '',
         users: [],
     };
@@ -22,10 +22,13 @@ const CreateProject: React.FC<ICreate<ProjectForm>> = ({onSubmit, onCloseModal, 
     const fields = {
         title: 'Title',
         deadline: 'Deadline',
+        description: 'Description',
+        status: 'Status',
+        priority: 'Priority',
     };
 
-    const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<ProjectForm>(
-        editData || projectInitialValues,
+    const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<ITaskForm>(
+        editData || taskInitialValues,
         onSubmit,
         onCloseModal
     );
@@ -44,4 +47,4 @@ const CreateProject: React.FC<ICreate<ProjectForm>> = ({onSubmit, onCloseModal, 
     );
 };
 
-export default CreateProject;
+export default CreateTask;

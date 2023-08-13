@@ -41,19 +41,19 @@ const Projects = () => {
 
     const [data, setData] = React.useState<ProjectData[]>(mockProjects);
     const [showModal, setShowModal] = React.useState<boolean>(false);
-    const [editData, setEditData] = React.useState<ProjectForm | null>(null);
+    const [editProject, setEditProject] = React.useState<ProjectForm | null>(null);
 
     const handleShow = () => setShowModal(true);
 
     const handleClose = () => {
         setShowModal(false);
-        setEditData(null);
+        setEditProject(null);
     }
 
     const onSubmitHandler = (formInput: ProjectForm) => {
-        if (editData) {
+        if (editProject) {
             // Edit
-            setEditData(null);
+            setEditProject(null);
         } else {
             // Create
         }
@@ -62,7 +62,7 @@ const Projects = () => {
     const openEditModal = (id: number) => {
         setShowModal(true);
         const found: ProjectData = data.find(item => item.id === id)!
-        setEditData({
+        setEditProject({
             title: found.title,
             users: found.users.map((user) => {
                 return {
@@ -79,7 +79,7 @@ const Projects = () => {
         <Container className={'mt-5'}>
             <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
                 <CreateProject
-                    editData={editData}
+                    editData={editProject}
                     onCloseModal={handleClose}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>

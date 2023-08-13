@@ -3,6 +3,8 @@ import {Col, Container, Row} from "react-bootstrap";
 import Task, {ITask, ITaskForm} from "./Task/Task";
 import {mockTasks} from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
+import CustomModal from "../../component/CustomModal/CustomModal";
+import CreateTask from "./CreateTask/CreateTask";
 
 
 const Tasks = () => {
@@ -18,7 +20,7 @@ const Tasks = () => {
         setEditTask(null);
     }
 
-    const onSubmitHandler = (formInput: ITask) => {
+    const onSubmitHandler = (formInput: ITaskForm) => {
         if (editTask) {
             // Edit
             setEditTask(null);
@@ -48,9 +50,15 @@ const Tasks = () => {
 
     return (
         <Container className={'mt-5 projects_container'}>
+            <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
+                <CreateTask
+                    editData={editTask}
+                    onCloseModal={handleClose}
+                    onSubmit={onSubmitHandler}/>
+            </CustomModal>
             <div className={'d-flex align-items-center justify-content-between'}>
                 <h4 className={'fw-bold'}>My Tasks</h4>
-                <CustomButton>Create</CustomButton>
+                <CustomButton handleShow={handleShow}>Create</CustomButton>
             </div>
             <Row className={'justify-content-center '}>
                 {

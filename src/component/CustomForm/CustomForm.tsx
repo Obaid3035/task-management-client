@@ -8,10 +8,14 @@ interface ICustomForm {
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     setFormData: React.Dispatch<React.SetStateAction<any>>;
     users: ISelect[];
+    status?: ISelect[];
+    priority?: ISelect[];
     fields: {
         title: string;
         deadline: string;
         description?: string;
+        status?: string,
+        priority?: string
     };
 }
 
@@ -21,6 +25,8 @@ const CustomForm: React.FC<ICustomForm> = (
         handleChange,
         setFormData,
         users,
+        status,
+        priority,
         fields,
     }) => {
 
@@ -51,7 +57,7 @@ const CustomForm: React.FC<ICustomForm> = (
                     isMulti
                     name="colors"
                     options={users}
-                    onChange={(option: any) => {
+                    onChange={(option) => {
                         setFormData({
                             ...formData,
                             users: option,
@@ -62,6 +68,55 @@ const CustomForm: React.FC<ICustomForm> = (
                     classNamePrefix="select"
                 />
             </Form.Group>
+            {fields.description && (
+                <Form.Group className={'mt-3'}>
+                    <Form.Label>{fields.description}</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+            )}
+            {fields.status && (
+                <Form.Group className={'mt-3'}>
+                    <Form.Label>{fields.status }</Form.Label>
+                    <Select
+                        isMulti
+                        name="colors"
+                        options={status}
+                        onChange={(option: any) => {
+                            setFormData({
+                                ...formData,
+                                status: option,
+                            });
+                        }}
+                        value={formData?.status}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                </Form.Group>
+            )}
+            {fields.priority && (
+                <Form.Group className={'mt-3'}>
+                    <Form.Label>{fields.priority}</Form.Label>
+                    <Select
+                        isMulti
+                        name="colors"
+                        options={priority}
+                        onChange={(option) => {
+                            setFormData({
+                                ...formData,
+                                priority: option,
+                            });
+                        }}
+                        value={formData?.priority}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+                </Form.Group>
+            )}
         </React.Fragment>
     );
 };
