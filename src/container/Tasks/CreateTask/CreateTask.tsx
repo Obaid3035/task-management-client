@@ -9,7 +9,7 @@ import {ITaskForm} from "../../../interface";
 
 
 
-const CreateTask: React.FC<ICreate<ITaskForm>> = ({onSubmit, onCloseModal, editData}) => {
+const CreateTask: React.FC<ICreate<ITaskForm>> = ({onSubmit, editData}) => {
     const taskInitialValues: ITaskForm = {
         title: '',
         description: '',
@@ -23,6 +23,7 @@ const CreateTask: React.FC<ICreate<ITaskForm>> = ({onSubmit, onCloseModal, editD
         title: 'Title',
         deadline: 'Deadline',
         description: 'Description',
+        users: 'Users',
         status: 'Status',
         priority: 'Priority',
     };
@@ -30,7 +31,6 @@ const CreateTask: React.FC<ICreate<ITaskForm>> = ({onSubmit, onCloseModal, editD
     const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<ITaskForm>(
         editData || taskInitialValues,
         onSubmit,
-        onCloseModal
     );
 
     return (

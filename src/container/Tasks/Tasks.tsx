@@ -55,7 +55,6 @@ const Tasks = () => {
             <CustomModal showModal={showModal} title={'Create Task'} handleClose={handleClose}>
                 <CreateTask
                     editData={editTask}
-                    onCloseModal={handleClose}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>
             <div className={'d-flex align-items-center justify-content-between'}>

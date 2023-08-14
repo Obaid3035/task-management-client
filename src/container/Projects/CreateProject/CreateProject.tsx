@@ -8,11 +8,10 @@ import {IProjectForm} from "../../../interface";
 
 export interface ICreate<T> {
     onSubmit: (formData: T) => void;
-    onCloseModal: () => void;
     editData: T | null;
 }
 
-const CreateProject: React.FC<ICreate<IProjectForm>> = ({onSubmit, onCloseModal, editData}) => {
+const CreateProject: React.FC<ICreate<IProjectForm>> = ({onSubmit, editData}) => {
     const projectInitialValues: IProjectForm = {
         title: '',
         deadline: '',
@@ -22,12 +21,12 @@ const CreateProject: React.FC<ICreate<IProjectForm>> = ({onSubmit, onCloseModal,
     const fields = {
         title: 'Title',
         deadline: 'Deadline',
+        users: 'users'
     };
 
     const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<IProjectForm>(
         editData || projectInitialValues,
         onSubmit,
-        onCloseModal
     );
 
     return (

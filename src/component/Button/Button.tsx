@@ -5,12 +5,13 @@ import './Button.css';
 export interface ICustomButton {
     handleShow?: () => void,
     children: ReactNode,
-    className?: string
+    className?: string,
+    type?: 'submit'
 }
 
-const CustomButton: React.FC<ICustomButton> = ({ handleShow, className }) => {
+const CustomButton: React.FC<ICustomButton> = ({ handleShow, className, type }) => {
     return (
-        <Button className={"custom_btn " + className} onClick={handleShow}>Create</Button>
+        <Button type={type} className={"custom_btn " + className} onClick={handleShow}>Create</Button>
     );
 };
 

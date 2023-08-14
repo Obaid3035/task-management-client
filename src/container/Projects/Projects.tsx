@@ -49,7 +49,6 @@ const Projects = () => {
             <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
                 <CreateProject
                     editData={editProject}
-                    onCloseModal={handleClose}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>
             <div className={'d-flex align-items-center justify-content-between'}>

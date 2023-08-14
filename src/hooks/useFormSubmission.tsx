@@ -4,7 +4,6 @@ import {useForm} from "./useForm";
 export function useFormSubmission<T>(
     initialValues: T,
     onSubmit: (formData: T) => void,
-    onCloseModal: () => void
 ) {
     const {formData, handleChange, resetForm, setFormData} = useForm<T>(initialValues);
 
@@ -13,9 +12,8 @@ export function useFormSubmission<T>(
             e.preventDefault();
             onSubmit(formData);
             resetForm();
-            onCloseModal();
         },
-        [onSubmit, formData, resetForm, onCloseModal]
+        [onSubmit, formData, resetForm]
     );
 
     return {formData, handleChange, handleSubmit, setFormData};

@@ -6,6 +6,10 @@ export interface IUser {
     email?: string
 }
 
+export interface IAuth extends Omit<IUser, 'id'>{
+    password: string;
+}
+
 export interface ISelect {
     value: number,
     label: string
@@ -30,3 +34,6 @@ export interface IProjectForm {
 export interface ITaskForm extends Omit<ITask, 'users'> {
     users?: ISelect[]
 }
+
+
+export type ILogin = Omit<IAuth, 'name'>
