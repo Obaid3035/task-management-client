@@ -3,9 +3,9 @@ import {Container, Row} from "react-bootstrap";
 import CreateProject from "./CreateProject/CreateProject";
 import {mockProjects} from "../../utils/utils";
 import CustomModal from "../../component/CustomModal/CustomModal";
-import CustomButton from "../../component/Button/Button";
 import {IProjectData, IProjectForm} from "../../interface";
 import ProjectList from "./ProjectList";
+import Header from "../../component/Header/Header";
 
 const Projects = () => {
     const [data, setData] = React.useState<IProjectData[]>(mockProjects);
@@ -51,10 +51,7 @@ const Projects = () => {
                     editData={editProject}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>
-            <div className={'d-flex align-items-center justify-content-between'}>
-                <h4 className={'fw-bold'}>My Projects</h4>
-                <CustomButton handleShow={handleShow}>Create</CustomButton>
-            </div>
+            <Header handleShow={handleShow} title={'My Projects'}/>
             <Row className={'justify-content-center align-items-center'}>
                 {mockProjects.length > 0 ? (
                     <ProjectList projects={mockProjects} openEditModal={openEditModal}/>

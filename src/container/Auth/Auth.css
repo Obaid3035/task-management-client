@@ -8,3 +8,8 @@
     border-radius: 20px;
     padding: 19px 20px;
 }
+
+.member {
+    font-size: 13px;
+    cursor: pointer;
+}

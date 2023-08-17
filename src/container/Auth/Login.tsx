@@ -1,53 +1,87 @@
-import React from 'react';
-import {IAuth, ILogin} from "../../interface";
-import {useFormSubmission} from "../../hooks/useFormSubmission";
+import React, { useState } from "react";
+import { ILogin } from "../../interface";
+import { useFormSubmission } from "../../hooks/useFormSubmission";
 import CustomForm from "../../component/CustomForm/CustomForm";
-import {users} from "../../utils/utils";
+import { getCookie, users } from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
-import {Col, Container, Form, Row} from "react-bootstrap";
-import './Auth.css';
-
+import { Col, Container, Form, ProgressBar, Row, Spinner } from "react-bootstrap";
+import "./Auth.css";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useAuth } from "../../context/authContext";
 
 
 const Login = () => {
-    const loginInitialValues: ILogin = {
-        email: '',
-        password: ''
-    };
+  const navigation = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
+  const { onLoginHandler, isAuthenticated } = useAuth();
+  const loginInitialValues: ILogin = {
+    email: "",
+    password: ""
+  };
 
-    const fields = {
-        email: 'Email',
-        password: 'Password',
-    };
-
-    const onSubmitHandler = (formInput: ILogin) => {
-        console.log(formInput)
+  React.useEffect(() => {
+    if (isAuthenticated){
+      navigation("/")
     }
+  }, []);
 
-    const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<ILogin>(
-        loginInitialValues,
-        onSubmitHandler,
-    );
+  const fields = {
+    email: "Email",
+    password: "Password"
+  };
+
+  const onSubmitHandler = async (formInput: ILogin) => {
+    setIsLoading(true)
+    try {
+      await onLoginHandler(formInput);
+      navigation('/');
+      toast.success('Successfully Logged In')
+    } catch (e: any) {
+      toast.error(e.response.data.message,
+        {
+          style: {
+            borderRadius: '10px',
+            background: '#000000',
+            color: '#fff',
+          },
+        })
+    } finally {
+      setIsLoading(false)
+    }
+  };
+
+  const { formData, handleChange, handleSubmit, setFormData } = useFormSubmission<ILogin>(
+    loginInitialValues,
+    onSubmitHandler
+  );
 
 
-    return (
-        <Container className={'auth_container'}>
-            <Row className={'justify-content-center align-items-center h-100'}>
-                <Col md={3}>
-                    <Form onSubmit={handleSubmit} className={'auth_form'}>
-                        <CustomForm
-                            setFormData={setFormData}
-                            formData={formData}
-                            handleChange={handleChange}
-                            users={users}
-                            fields={fields}
-                        />
-                        <CustomButton type={'submit'} className={'mt-4'}>Submit</CustomButton>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
-    );
+  return (
+    <Container className={"auth_container"}>
+      <Row className={"justify-content-center align-items-center h-100"}>
+        <Col md={3}>
+          <Form onSubmit={handleSubmit} className={"auth_form"}>
+            <CustomForm
+              setFormData={setFormData}
+              formData={formData}
+              handleChange={handleChange}
+              users={users}
+              fields={fields}
+            />
+            <p className={"text-muted mt-3 member"}
+               onClick={() => navigation("/register")}
+            >Not a member ?</p>
+            {
+              isLoading ? (
+                <Spinner />
+              ) : <CustomButton type={"submit"} className={"mt-2"}>Login</CustomButton>
+            }
+          </Form>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default Login;

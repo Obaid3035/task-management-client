@@ -7,6 +7,7 @@ import CustomModal from "../../component/CustomModal/CustomModal";
 import CreateTask from "./CreateTask/CreateTask";
 import {ITaskForm} from "../../interface";
 import TaskList from "./TaskList";
+import Header from "../../component/Header/Header";
 
 
 const Tasks = () => {
@@ -57,10 +58,7 @@ const Tasks = () => {
                     editData={editTask}
                     onSubmit={onSubmitHandler}/>
             </CustomModal>
-            <div className={'d-flex align-items-center justify-content-between'}>
-                <h4 className={'fw-bold'}>My Tasks</h4>
-                <CustomButton handleShow={handleShow}>Create</CustomButton>
-            </div>
+            <Header handleShow={handleShow} title={'My Task'}/>
             <Row className={'justify-content-center'}>
                 {mockTasks.length > 0 ? (
                     <TaskList tasks={mockTasks}/>

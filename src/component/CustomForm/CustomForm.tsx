@@ -45,6 +45,7 @@ const CustomForm: React.FC<ICustomForm> = (
                         <Form.Label>{fields.name}</Form.Label>
                         <Form.Control
                             type="text"
+                            required
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
@@ -58,7 +59,8 @@ const CustomForm: React.FC<ICustomForm> = (
                     <Form.Group className={'mt-3'}>
                         <Form.Label>{fields.email}</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="email"
+                            required
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
@@ -72,7 +74,8 @@ const CustomForm: React.FC<ICustomForm> = (
                     <Form.Group className={'mt-3'}>
                         <Form.Label>{fields.password}</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="password"
+                            required
                             name="password"
                             value={formData.password}
                             onChange={handleChange}

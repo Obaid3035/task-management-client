@@ -9,9 +9,9 @@ export interface ICustomButton {
     type?: 'submit'
 }
 
-const CustomButton: React.FC<ICustomButton> = ({ handleShow, className, type }) => {
+const CustomButton: React.FC<ICustomButton> = ({ handleShow, className, type, children }) => {
     return (
-        <Button type={type} className={"custom_btn " + className} onClick={handleShow}>Create</Button>
+        <Button type={type} className={"custom_btn " + className} onClick={handleShow}>{children}</Button>
     );
 };
 

@@ -2,13 +2,27 @@ import React from 'react';
 import {IAuth} from "../../interface";
 import {useFormSubmission} from "../../hooks/useFormSubmission";
 import CustomForm from "../../component/CustomForm/CustomForm";
-import {users} from "../../utils/utils";
+import { users } from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
 import {Col, Container, Form, Row} from "react-bootstrap";
 import './Auth.css';
+import { useNavigate } from "react-router-dom";
+import { register } from "../../service/api/auth";
+import { useAuth } from "../../context/authContext";
+import toast from "react-hot-toast";
 
 
 const Register = () => {
+    const navigation = useNavigate();
+
+    const { onRegisterHandler, isAuthenticated } = useAuth();
+
+    React.useEffect(() => {
+        if (isAuthenticated){
+            navigation("/")
+        }
+    }, []);
+
 
     const authInitialValues: IAuth = {
         email: '',
@@ -22,8 +36,22 @@ const Register = () => {
         password: 'Password',
     };
 
-    const onSubmitHandler = (formInput: IAuth) => {
+    const onSubmitHandler = async (formInput: IAuth) => {
+       try {
+           await onRegisterHandler(formInput)
+           navigation('/')
+           toast.success('Register Successfully')
 
+       } catch (e: any) {
+           toast.error(e.response.data.message,
+             {
+                 style: {
+                     borderRadius: '10px',
+                     background: '#000000',
+                     color: '#fff',
+                 },
+             })
+       }
     }
 
     const {formData, handleChange, handleSubmit, setFormData} = useFormSubmission<IAuth>(
@@ -43,7 +71,10 @@ const Register = () => {
                             users={users}
                             fields={fields}
                         />
-                        <CustomButton className={'mt-4'}>Submit</CustomButton>
+                        <p className={'text-muted mt-3 member'}
+                           onClick={() => navigation('/login')}
+                        >Already a member ?</p>
+                        <CustomButton className={'mt-2'}>Register</CustomButton>
                     </Form>
                 </Col>
             </Row>
