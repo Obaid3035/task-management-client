@@ -1,12 +1,15 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import { Toaster } from 'react-hot-toast';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Projects from "./container/Projects/Projects";
 import Tasks from "./container/Tasks/Tasks";
 import Register from "./container/Auth/Register";
 import Login from "./container/Auth/Login";
-import './App.css';
-import { AuthProvider } from "./context/authContext";
+import "./App.css";
+import ProtectedRoute from "./component/AuthRedirectGuard/ProtectedRoute";
+import AuthRedirectGuard from "./component/AuthRedirectGuard/AuthRedirectGuard";
+import { useAuth } from "./context/authContext";
+import { Spinner } from "react-bootstrap";
 
 export enum USER_ROLE {
   USER = "user",
@@ -14,36 +17,59 @@ export enum USER_ROLE {
 }
 
 function App() {
-  return (
-    <AuthProvider>
-      <div className="App">
-        <Toaster />
-        <Router>
-          <Routes>
-            <Route path={"/"} element={
-              <React.Fragment>
-                <Projects/>
-              </React.Fragment>
-            }/>
-            <Route path={"/tasks"} element={
-              <React.Fragment>
-                <Tasks/>
-              </React.Fragment>
-            }/>
-            <Route path={"/register"} element={
-              <React.Fragment>
-                <Register/>
-              </React.Fragment>
-            }/>
-            <Route path={"/login"} element={
-              <React.Fragment>
-                <Login/>
-              </React.Fragment>
-            }/>
-          </Routes>
-        </Router>
+
+  const { isAuthenticated, loader } = useAuth();
+
+
+  const routes = [
+    {
+      id: 1,
+      component: <Projects />,
+      path: "/"
+    },
+    {
+      id: 2,
+      component: <Tasks />,
+      path: "/tasks"
+    }
+  ];
+
+  if (loader) {
+    return (
+      <div className={'d-flex justify-content-center align-items-center vh-100'}>
+        <Spinner/>
       </div>
-    </AuthProvider>
+    )
+  }
+
+
+  return (
+    <div className="App">
+      <Toaster />
+      <Router>
+        <Routes>
+          {
+            routes.map((el) => (
+              <Route path={el.path} element={
+                <ProtectedRoute isAuthenticated={isAuthenticated}>
+                  {el.component}
+                </ProtectedRoute>
+              } />
+            ))
+          }
+          <Route path={"/login"} element={
+            <AuthRedirectGuard isAuthenticated={isAuthenticated}>
+              <Login/>
+            </AuthRedirectGuard>
+          } />
+          <Route path={"/register"} element={
+            <AuthRedirectGuard isAuthenticated={isAuthenticated}>
+              <Register/>
+            </AuthRedirectGuard>
+          } />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

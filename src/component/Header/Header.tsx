@@ -3,6 +3,9 @@ import CustomButton from "../Button/Button";
 import { FiLogOut } from 'react-icons/fi';
 import { logout } from "../../service/api/auth";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
+import { useAuth } from "../../context/authContext";
+import toast from "react-hot-toast";
 
 interface IHeader {
   handleShow: () => void;
@@ -10,12 +13,23 @@ interface IHeader {
 }
 
 const Header: React.FC<IHeader> = ({ handleShow, title }) => {
-  const navigation = useNavigate()
+  const navigation = useNavigate();
+  const { loader, setLoader, setIsAuthenticated } = useAuth();
   const onLogoutHandler = async () => {
+    setLoader(true)
     await logout();
-    navigation('/login', {
-      replace: true,
-    })
+    setIsAuthenticated(false)
+    setLoader(false)
+    toast.success('Successfully logged out')
+    navigation('/login')
+  }
+
+  if (loader) {
+    return (
+      <div className={'d-flex justify-content-center align-items-center vh-100'}>
+        <Spinner/>
+      </div>
+    )
   }
 
   return (

@@ -12,3 +12,7 @@ export function login(userInput: ILogin) {
 export function logout() {
   return axiosInstance.post('/auth/logout')
 }
+
+export function authorize() {
+  return axiosInstance.post('/auth')
+}

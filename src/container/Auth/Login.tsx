@@ -20,12 +20,6 @@ const Login = () => {
     password: ""
   };
 
-  React.useEffect(() => {
-    if (isAuthenticated){
-      navigation("/")
-    }
-  }, []);
-
   const fields = {
     email: "Email",
     password: "Password"
