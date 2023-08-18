@@ -1,73 +1,48 @@
-import React from 'react';
-import {Container, Row} from "react-bootstrap";
-import {ITask} from "./Task/Task";
-import {mockTasks} from "../../utils/utils";
-import CustomButton from "../../component/Button/Button";
+import React from "react";
+import { Container, Row } from "react-bootstrap";
+import { ITask } from "./Task/Task";
+import { mockTasks } from "../../utils/utils";
 import CustomModal from "../../component/CustomModal/CustomModal";
 import CreateTask from "./CreateTask/CreateTask";
-import {ITaskForm} from "../../interface";
+import { ITaskForm } from "../../interface";
 import TaskList from "./TaskList";
 import Header from "../../component/Header/Header";
 
 
 const Tasks = () => {
 
-    const [tasks, setTasks] = React.useState<ITask[]>(mockTasks);
-    const [showModal, setShowModal] = React.useState<boolean>(false);
-    const [editTask, setEditTask] = React.useState<ITaskForm | null>(null);
+  const [tasks, setTasks] = React.useState<ITask[]>(mockTasks);
+  const [formLoader, setFormLoader] = React.useState(false);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
 
-    const handleShow = () => setShowModal(true);
+  const handleShow = () => setShowModal(true);
 
-    const handleClose = () => {
-        setShowModal(false);
-        setEditTask(null);
-    }
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
-    const onSubmitHandler = (formInput: ITaskForm) => {
-        if (editTask) {
-            // Edit
-            setEditTask(null);
-        } else {
-            // Create
-        }
-    }
+  const onSubmitHandler = (formInput: ITaskForm) => {
 
-    const openEditModal = (id: number) => {
-        setShowModal(true);
-        const found: ITask = tasks.find(item => item.id === id)!
-        setEditTask({
-            title: found.title,
-            description: found.description,
-            status: found.status,
-            priority: found.priority,
-            users: found.users.map((user) => {
-                return {
-                    value: user.id,
-                    label: user.name
-                }
-            }),
-            deadline: found.deadline
-        });
-    }
+  };
 
 
-    return (
-        <Container className={'mt-5 projects_container'}>
-            <CustomModal showModal={showModal} title={'Create Task'} handleClose={handleClose}>
-                <CreateTask
-                    editData={editTask}
-                    onSubmit={onSubmitHandler}/>
-            </CustomModal>
-            <Header handleShow={handleShow} title={'My Task'}/>
-            <Row className={'justify-content-center'}>
-                {mockTasks.length > 0 ? (
-                    <TaskList tasks={mockTasks}/>
-                ) : (
-                    <div>No Tasks Found</div>
-                )}
-            </Row>
-        </Container>
-    );
+  return (
+    <Container className={"mt-5 projects_container"}>
+      <CustomModal showModal={showModal} title={"Create Task"} handleClose={handleClose}>
+        <CreateTask
+          loader={formLoader}
+          onSubmit={onSubmitHandler} />
+      </CustomModal>
+      <Header handleShow={handleShow} title={"My Task"} />
+      <Row className={"justify-content-center"}>
+        {mockTasks.length > 0 ? (
+          <TaskList tasks={mockTasks} />
+        ) : (
+          <div>No Tasks Found</div>
+        )}
+      </Row>
+    </Container>
+  );
 };
 
 export default Tasks;

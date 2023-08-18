@@ -195,22 +195,22 @@ export function getColorForStatus(status: string) {
     }
 
     switch (status) {
-        case TASK_STATUS.CANCELLED:
+        case TASK_STATUS.IN_PROGRESS:
         case TASK_PRIORITY.MEDIUM:
             colorObj = {
                 background: '#FEF2E7',
                 color: '#F3AE5F'
             }
             break;
-        case TASK_STATUS.IN_PROGRESS:
-        case TASK_PRIORITY.HIGH:
+        case TASK_STATUS.COMPLETED:
+        case TASK_PRIORITY.LOW:
             colorObj = {
                 background: '#E6F9F6',
                 color: '#3DBBA0'
             }
             break;
-        case TASK_STATUS.COMPLETED:
-        case TASK_PRIORITY.LOW:
+        case TASK_STATUS.CANCELLED:
+        case TASK_PRIORITY.HIGH:
             colorObj = {
                 background: '#FCE7EA',
                 color: '#E7828C'
@@ -232,3 +232,11 @@ export const getCookie = (name: string) => {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop()?.split(';').shift();
 };
+
+
+export const prettyDate = (dateString: string) => {
+    const date: Date = new Date(dateString); // Replace with your date
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formatter: Intl.DateTimeFormat = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(date);
+}

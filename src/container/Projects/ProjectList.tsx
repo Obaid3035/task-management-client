@@ -1,4 +1,3 @@
-// ProjectList.tsx
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import Project from './Project/Project';
@@ -6,10 +5,9 @@ import {IProjectData} from "../../interface";
 
 interface IProjectList{
     projects: IProjectData[];
-    openEditModal: (id: number) => void;
 }
 
-const ProjectList: React.FC<IProjectList> = ({ projects, openEditModal }) => {
+const ProjectList: React.FC<IProjectList> = ({ projects }) => {
     return (
         <>
             {projects.map((project) => (
@@ -17,7 +15,6 @@ const ProjectList: React.FC<IProjectList> = ({ projects, openEditModal }) => {
                     <Project
                         id={project.id}
                         deadline={project.deadline}
-                        openEditModal={() => openEditModal(project.id)}
                         completed_task={project.completed_task}
                         created_at={project.created_at}
                         title={project.title}

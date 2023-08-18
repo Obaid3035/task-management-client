@@ -10,6 +10,7 @@ import ProtectedRoute from "./component/AuthRedirectGuard/ProtectedRoute";
 import AuthRedirectGuard from "./component/AuthRedirectGuard/AuthRedirectGuard";
 import { useAuth } from "./context/authContext";
 import { Spinner } from "react-bootstrap";
+import Loader from "./component/Loader/Loader";
 
 export enum USER_ROLE {
   USER = "user",
@@ -35,11 +36,7 @@ function App() {
   ];
 
   if (loader) {
-    return (
-      <div className={'d-flex justify-content-center align-items-center vh-100'}>
-        <Spinner/>
-      </div>
-    )
+    return <Loader/>
   }
 
 

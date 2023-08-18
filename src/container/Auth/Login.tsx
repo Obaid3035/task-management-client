@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { ILogin } from "../../interface";
 import { useFormSubmission } from "../../hooks/useFormSubmission";
 import CustomForm from "../../component/CustomForm/CustomForm";
-import { getCookie, users } from "../../utils/utils";
 import CustomButton from "../../component/Button/Button";
-import { Col, Container, Form, ProgressBar, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import "./Auth.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,8 +12,8 @@ import { useAuth } from "../../context/authContext";
 
 const Login = () => {
   const navigation = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  const { onLoginHandler, isAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { onLoginHandler } = useAuth();
   const loginInitialValues: ILogin = {
     email: "",
     password: ""
@@ -26,22 +25,22 @@ const Login = () => {
   };
 
   const onSubmitHandler = async (formInput: ILogin) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       await onLoginHandler(formInput);
-      navigation('/');
-      toast.success('Successfully Logged In')
+      navigation("/");
+      toast.success("Successfully Logged In");
     } catch (e: any) {
       toast.error(e.response.data.message,
         {
           style: {
-            borderRadius: '10px',
-            background: '#000000',
-            color: '#fff',
-          },
-        })
+            borderRadius: "10px",
+            background: "#000000",
+            color: "#fff"
+          }
+        });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
 
@@ -60,7 +59,6 @@ const Login = () => {
               setFormData={setFormData}
               formData={formData}
               handleChange={handleChange}
-              users={users}
               fields={fields}
             />
             <p className={"text-muted mt-3 member"}

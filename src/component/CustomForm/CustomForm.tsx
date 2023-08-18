@@ -35,7 +35,6 @@ const CustomForm: React.FC<ICustomForm> = (
     }) => {
 
 
-
     return (
         <React.Fragment>
 
@@ -114,7 +113,7 @@ const CustomForm: React.FC<ICustomForm> = (
                     <Form.Control
                         type="date"
                         name="deadline"
-                        value={formData.deadline || ''}
+                        value={formData.deadline}
                         onChange={handleChange}
                         placeholder="Select a date"
                     />

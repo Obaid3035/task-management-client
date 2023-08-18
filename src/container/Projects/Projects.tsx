@@ -1,67 +1,78 @@
-import React from 'react';
-import {Container, Row} from "react-bootstrap";
+import React from "react";
+import { Container, Row } from "react-bootstrap";
 import CreateProject from "./CreateProject/CreateProject";
-import {mockProjects} from "../../utils/utils";
 import CustomModal from "../../component/CustomModal/CustomModal";
-import {IProjectData, IProjectForm} from "../../interface";
+import { IProjectData, IProjectForm } from "../../interface";
 import ProjectList from "./ProjectList";
 import Header from "../../component/Header/Header";
+import { getAllProjects } from "../../service/api/project";
+import toast from "react-hot-toast";
+import Loader from "../../component/Loader/Loader";
 
 const Projects = () => {
-    const [data, setData] = React.useState<IProjectData[]>(mockProjects);
-    const [showModal, setShowModal] = React.useState<boolean>(false);
-    const [editProject, setEditProject] = React.useState<IProjectForm | null>(null);
+  const [projects, setProjects] = React.useState<IProjectData[]>([]);
+  const [loader, setLoader] = React.useState(false);
+  const [formLoader, setFormLoader] = React.useState(false);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
 
-    const handleShow = () => setShowModal(true);
+  React.useEffect(() => {
+    setLoader(true);
+    getAllProjects()
+      .then((res) => {
+        setProjects(res.data);
+        setLoader(false);
+      })
+      .catch((e) => {
+        toast.error(e.response.data.message,
+          {
+            style: {
+              borderRadius: "10px",
+              background: "#000000",
+              color: "#fff"
+            }
+          });
+        setLoader(false);
+      });
+  }, []);
 
-    const handleClose = () => {
-        setShowModal(false);
-        setEditProject(null);
-    }
 
-    const onSubmitHandler = (formInput: IProjectForm) => {
-        if (editProject) {
-            // Edit
-            setEditProject(null);
-        } else {
-            // Create
+  const handleShow = () => setShowModal(true);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const onSubmitHandler = async (formInput: IProjectForm) => {
+
+  };
+
+  if (loader) {
+    return <Loader />;
+  }
+
+
+  return (
+    <Container className={"mt-5"}>
+      <CustomModal showModal={showModal} title={"Create Project"} handleClose={handleClose}>
+        <CreateProject
+          loader={formLoader}
+          onSubmit={onSubmitHandler} />
+      </CustomModal>
+      <Header handleShow={handleShow} title={"My Projects"} />
+      <Row className={"justify-content-center align-items-center"}>
+        {
+          !loader ? (
+            projects.length > 0 ? (
+              <ProjectList projects={projects} />
+            ) : (
+              <div>No Projects Found</div>
+            )
+          ) : <Loader />
         }
-    }
 
-    const openEditModal = (id: number) => {
-        setShowModal(true);
-        const found: IProjectData = data.find(item => item.id === id)!
-        setEditProject({
-            title: found.title,
-            users: found.users.map((user) => {
-                return {
-                    value: user.id,
-                    label: user.name
-                }
-            }),
-            deadline: found.deadline
-        });
-    }
-
-
-    return (
-        <Container className={'mt-5'}>
-            <CustomModal showModal={showModal} title={'Create Project'} handleClose={handleClose}>
-                <CreateProject
-                    editData={editProject}
-                    onSubmit={onSubmitHandler}/>
-            </CustomModal>
-            <Header handleShow={handleShow} title={'My Projects'}/>
-            <Row className={'justify-content-center align-items-center'}>
-                {mockProjects.length > 0 ? (
-                    <ProjectList projects={mockProjects} openEditModal={openEditModal}/>
-                ) : (
-                    <div>No Projects Found</div>
-                )}
-
-            </Row>
-        </Container>
-    );
+      </Row>
+    </Container>
+  );
 };
 
 export default Projects;
